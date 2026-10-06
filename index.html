@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AP Stats: Unit 1b Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f5fa;--card:#fff;--ink:#16223b;--mute:#5a6580;--line:#d5dcea;--pri:#2b59c3;--ok:#1b7f4b;--okbg:#e2f4ea;--bad:#b3261e;--badbg:#fbe6e4;--t1:#2b59c3;--t2:#0e8a86;--t3:#8a46c2;--hl:#ffe27a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1626;--card:#19233b;--ink:#e8edf8;--mute:#9aa6c2;--line:#2d3a58;--pri:#7ea2ff;--ok:#6fdc9f;--okbg:#17382a;--bad:#ff8f86;--badbg:#401d1b;--t1:#7ea2ff;--t2:#4fd1cb;--t3:#c69aff;--hl:#6b5a14}}
+:root[data-theme="dark"]{--bg:#0f1626;--card:#19233b;--ink:#e8edf8;--mute:#9aa6c2;--line:#2d3a58;--pri:#7ea2ff;--ok:#6fdc9f;--okbg:#17382a;--bad:#ff8f86;--badbg:#401d1b;--t1:#7ea2ff;--t2:#4fd1cb;--t3:#c69aff;--hl:#6b5a14}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:1.7rem;line-height:1.2;margin:8px 0 4px}
+.sub{color:var(--mute);margin:0 0 18px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+.tabs,.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{padding:9px 16px;border:2px solid var(--line);background:var(--card);border-radius:10px;font-weight:700}
+.tab[aria-selected=true]{background:var(--pri);border-color:var(--pri);color:#fff}
+.chip{padding:6px 12px;border:2px solid var(--line);background:transparent;border-radius:20px;font-size:.92rem}
+.chip[aria-pressed=true]{border-color:var(--ink);background:var(--hl);color:var(--ink);font-weight:700}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:22px}
+.stage{min-height:230px;border-left-width:10px;border-left-style:solid;cursor:pointer;display:flex;flex-direction:column;justify-content:center;width:100%;text-align:left}
+.stage .tag{font-size:.88rem;color:var(--mute);margin-bottom:8px}
+.stage .term{font-size:1.6rem;font-weight:700;line-height:1.25}
+.stage .def{font-size:1.08rem}
+.stage .hint{margin-top:14px;color:var(--mute);font-size:.88rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.btn{padding:10px 18px;border-radius:10px;border:2px solid var(--line);background:var(--card);font-weight:700}
+.btn.p{background:var(--pri);border-color:var(--pri);color:#fff}
+.btn.good{border-color:var(--ok);color:var(--ok)}
+.grow{flex:1}
+.meta{color:var(--mute);font-size:.95rem}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 16px}
+.bar i{display:block;height:100%;background:var(--pri);transition:width .25s}
+.q{font-size:1.12rem;margin:0 0 14px}
+.opt{display:block;width:100%;text-align:left;padding:12px 14px;margin-bottom:9px;border:2px solid var(--line);border-radius:10px;background:var(--card)}
+.opt:hover:not([disabled]){border-color:var(--pri)}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}
+.opt.no{background:var(--badbg);border-color:var(--bad)}
+.why{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--bg);border:2px solid var(--line)}
+.score{font-size:2.4rem;font-weight:700;margin:4px 0}
+.miss{margin:8px 0;padding:10px 12px;border-radius:10px;background:var(--bg)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <h1>AP Stats: Unit 1b Study Hub</h1>
+  <p class="sub">Practice for your test on 1.11 Random Sampling, 1.12 Potential Problems with Sampling, and 1.13 Experimental Design.</p>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-f" aria-selected="true">Flashcards</button>
+    <button class="tab" role="tab" id="tab-q" aria-selected="false">Practice quiz</button>
+  </div>
+  <div class="chips" id="chips" aria-label="Choose a topic"></div>
+  <section id="view"></section>
+</main>
+<script>
+const TOP={"1.11":["Random sampling","--t1"],"1.12":["Sampling problems","--t2"],"1.13":["Experimental design","--t3"]};
+const CARDS=[
+["1.11","Sampling without replacement","Each unit can be selected only once. It is not returned to the population before the next pick."],
+["1.11","Sampling with replacement","A unit is returned to the population after selection, so it could be selected again."],
+["1.11","Simple random sample (SRS)","Every possible sample of size n has the same chance of being selected (e.g., random number generator, numbered slips of paper)."],
+["1.11","Stratified random sample","Split the population into non-overlapping groups (strata) of similar individuals, take an SRS within each stratum, and combine them."],
+["1.11","Cluster random sample","Split the population into clusters that each mirror the whole population. Take an SRS of clusters, then collect data from every unit in the chosen clusters."],
+["1.11","Systematic random sample","Pick a random starting point, then select every kth unit at a fixed interval."],
+["1.12","Bias (in sampling)","A systematic error in the sampling procedure that makes a statistic consistently larger or consistently smaller than the parameter it estimates."],
+["1.12","Voluntary response bias","Can occur when the sample consists entirely of volunteers (call-in and online polls)."],
+["1.12","Undercoverage bias","Part of the population is left out of the sampling method or is less likely to be selected."],
+["1.12","Nonresponse bias","Some chosen individuals give no response, and respondents and nonrespondents may differ in ways that matter to the study."],
+["1.12","Response bias","Responses tend to differ from the true value in one direction: confusing or leading questions (question wording bias) or self-reported answers."],
+["1.12","Nonrandom sampling","Convenience and voluntary response samples don't use random chance to select individuals, so they can introduce bias."],
+["1.13","Four elements of a well-designed experiment","Comparison of at least two treatment groups (one may be a control), random assignment, replication, and direct control of extraneous sources of variation."],
+["1.13","Control group","Experimental units created for comparison. They may get a different treatment or a placebo to see whether the treatment of interest has an effect."],
+["1.13","Placebo effect","The difference between the average response to a placebo and the average response to no treatment."],
+["1.13","Single-blind","Participants don't know which treatment they get, but the research team does (or vice versa)."],
+["1.13","Double-blind","Neither the participants nor the research team members who interact with them know who gets which treatment."],
+["1.13","Extraneous variable","A variable known or believed to affect the response that is not an explanatory variable being studied."],
+["1.13","Purpose of random assignment","Create treatment groups that are as similar as possible on extraneous variables. If it works, each extraneous variable has about the same distribution in every group."],
+["1.13","Confounding variable","Related to the explanatory variable so that you can't tell whether the explanatory or the confounding variable is influencing the response."],
+["1.13","Replication","More than one experimental unit is assigned to each treatment."],
+["1.13","Direct control","Keeping the settings of certain extraneous variables the same from unit to unit."],
+["1.13","Completely randomized design","Treatments are assigned to experimental units completely at random. Group sizes don't have to be equal."],
+["1.13","Randomized block design","Group units into blocks that are alike on a blocking variable, then randomly assign all treatments within each block."],
+["1.13","Purpose of blocking","Separate the variation caused by the blocking variable from the rest of the variation, allowing more precise comparisons of treatments."],
+["1.13","Matched pairs design","A randomized block design with only two treatments. Pair similar units and randomly assign one treatment within each pair, or give each unit both treatments in random order."],
+["1.13","Cause-and-effect conclusions","Random assignment reduces the potential for confounding, which allows cause-and-effect conclusions about the explanatory and response variables."]
+];
+// [topic, question, correct answer, three wrong answers, explanation]
+const QS=[
+["1.11","A principal wants opinions from each grade (9–12). She randomly selects 25 students from each grade and combines them. What sampling method is this?","Stratified random sample",["Cluster random sample","Systematic random sample","Simple random sample"],"Grades are non-overlapping groups (strata), with an SRS taken within each one."],
+["1.11","A district randomly selects 6 of its 40 homerooms and surveys every student in those 6 homerooms. What sampling method is this?","Cluster random sample",["Stratified random sample","Simple random sample","Systematic random sample"],"Homerooms are clusters. An SRS of clusters is chosen, and every unit in the chosen clusters is surveyed."],
+["1.11","A park ranger picks a random starting spot between 1 and 10, then surveys every 10th visitor leaving the park. What sampling method is this?","Systematic random sample",["Cluster random sample","Stratified random sample","Convenience sample"],"A random starting point plus a fixed interval defines a systematic random sample."],
+["1.11","Which statement best describes a simple random sample of size n?","Every possible sample of size n has the same chance of being selected.",["Every individual has the same chance of being selected, and nothing more is required.","The population is divided into groups and the same number is taken from each.","Individuals are chosen because they are easy to reach."],"Equal chance for every sample is the defining feature. Other methods (like stratified) can give every individual an equal chance without making every sample equally likely."],
+["1.11","Students differ a lot by grade level, and you want to estimate average weekly homework time. Which method is most appropriate and why?","Stratified, because it ensures each grade is represented in the sample",["Cluster, because it's cheaper to survey whole groups of students","Systematic, because it avoids using random numbers","Stratified, because the strata should each contain a mix of every grade"],"Strata are built from similar individuals (homogeneous groups), which guarantees representation of each. Clusters are the ones that should mirror the whole population."],
+["1.11","A name is drawn from a hat, read aloud, and put back before the next name is drawn. This is sampling…","with replacement",["without replacement","using strata","using clusters"],"Returning the unit to the population before the next selection means it could be selected again."],
+["1.12","A radio show asks listeners to call in and vote on a local issue. The poll is most likely affected by…","voluntary response bias",["undercoverage bias","nonresponse bias","question wording bias"],"The sample consists entirely of people who chose to participate."],
+["1.12","A phone survey chooses numbers only from a landline directory. Which bias is the biggest concern?","Undercoverage bias",["Voluntary response bias","Nonresponse bias","Response bias"],"People without landlines are less likely (or unable) to be selected, so part of the population is left out."],
+["1.12","A survey mails 2,000 questionnaires randomly selected from a list, but only 300 are returned. This most likely introduces…","nonresponse bias",["voluntary response bias","undercoverage bias","response bias"],"Failure to get responses from many chosen individuals is a problem if respondents differ from nonrespondents."],
+["1.12","A survey asks, “Don't you agree that our wasteful school lunch program should be cut?” This is an example of…","response bias (question wording)",["nonresponse bias","undercoverage bias","voluntary response bias"],"Leading or confusing wording pushes answers in one direction."],
+["1.12","Which best describes bias in sampling?","A systematic error that makes a statistic consistently too high or too low compared to the parameter",["Random variation that makes different samples give different statistics","Having a sample that is too small to be useful","Any sample that includes volunteers"],"Bias is systematic, not random. A larger sample drawn the same flawed way will not fix it."],
+["1.12","A student surveys the first 40 people who walk into the cafeteria. Why is this a problem?","It's a convenience sample, which isn't selected by random chance and can be biased",["It's a cluster sample, so each cluster must be surveyed","It's a stratified sample with only one stratum","Samples under 50 can never be random"],"Nonrandom methods such as convenience or voluntary response can introduce bias."],
+["1.13","In a drug study, patients are randomly assigned to the drug or a placebo. Neither the patients nor the staff who interact with them know who gets which. This experiment is…","double-blind",["single-blind","a matched pairs design","observational"],"Double-blind: neither participants nor the research team members who interact with them know the assignments."],
+["1.13","What is the main purpose of random assignment in an experiment?","To make treatment groups as similar as possible with respect to extraneous variables",["To make sure the subjects are a random sample of the population","To make sure every group has exactly the same size","To keep the subjects from knowing their treatment"],"If random assignment works, each extraneous variable has about the same distribution in all treatment groups."],
+["1.13","A farmer tests a new fertilizer, but part of the field is sunny and part is shady. Which design is most appropriate?","Randomized block design, with sun and shade as blocks",["Completely randomized design with all plots treated alike","Matched pairs design with sun and shade as the two treatments","Cluster design with sun and shade as clusters"],"Sunlight is a source of variation in yield. Block on it and randomly assign all treatments within each block."],
+["1.13","Each subject tries both of two energy drinks, in a random order, and performance is measured after each. This is…","a matched pairs design",["a completely randomized design","a double-blind experiment by definition","an observational study"],"Each unit gets both treatments with the order randomized: a matched pairs design (a block design with 2 treatments)."],
+["1.13","Students who chose after-school tutoring scored higher than students who didn't. Why can't we conclude tutoring caused the higher scores?","Students weren't randomly assigned, so confounding variables (like motivation) could explain the difference",["The sample size was too small","Tutoring is not a treatment","Only double-blind studies can show cause and effect"],"Random assignment reduces confounding, and that is what allows cause-and-effect conclusions."],
+["1.13","Which describes replication in an experiment?","More than one experimental unit is assigned to each treatment",["Assigning treatments at random","Keeping conditions the same for every unit","Using a placebo with the control group"],"Replication means multiple units per treatment. The other choices describe random assignment, direct control, and a control group."],
+["1.13","A new teaching method is taught by Ms. Lee; the old method is taught by Mr. Park. Which is a confounding variable?","The teacher",["The test scores","The number of students","The type of method"],"The teacher is tied to the method (explanatory variable), so we can't tell whether the method or the teacher affected the scores."],
+["1.13","In a plant experiment, every plant gets the same amount of water and sunlight. This is an example of…","direct control",["replication","blinding","blocking"],"Keeping extraneous variable settings the same from unit to unit is direct control."]
+];
+
+const $=s=>document.querySelector(s);
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+let tab="f",topic="all",known=new Set();
+try{known=new Set(JSON.parse(localStorage.getItem("apstats-known")||"[]"))}catch(e){}
+const saveKnown=()=>{try{localStorage.setItem("apstats-known",JSON.stringify([...known]))}catch(e){}};
+const col=t=>`var(${TOP[t][1]})`;
+
+function chips(){
+  $("#chips").innerHTML=[["all","All topics"],...Object.entries(TOP).map(([k,v])=>[k,k+" "+v[0]])].map(([k,l])=>
+    `<button class="chip" data-k="${k}" aria-pressed="${topic===k}">${k==="all"?"":`<span class="dot" style="background:${col(k)}"></span>`}${l}</button>`).join("");
+  document.querySelectorAll("#chips .chip").forEach(b=>b.onclick=()=>{topic=b.dataset.k;chips();start()});
+}
+function setTab(t){tab=t;$("#tab-f").setAttribute("aria-selected",t==="f");$("#tab-q").setAttribute("aria-selected",t==="q");start()}
+$("#tab-f").onclick=()=>setTab("f");$("#tab-q").onclick=()=>setTab("q");
+const start=()=>tab==="f"?fcStart():qzStart();
+
+/* Flashcards */
+let deck=[],fi=0,flipped=false,hideKnown=false;
+function fcStart(){
+  deck=sh(CARDS.map((c,i)=>i).filter(i=>(topic==="all"||CARDS[i][0]===topic)&&!(hideKnown&&known.has(i))));
+  fi=0;flipped=false;fcDraw();
+}
+function fcDraw(){
+  const tot=CARDS.filter(c=>topic==="all"||c[0]===topic).length;
+  const kn=[...known].filter(i=>topic==="all"||CARDS[i][0]===topic).length;
+  if(!deck.length){
+    $("#view").innerHTML=`<div class="panel"><p class="q">${hideKnown?"You've marked every card in this set as known. Nice work.":"No cards here."}</p><div class="row"><button class="btn p" id="all">Show all cards</button><button class="btn" id="rs">Reset progress</button></div></div>`;
+    $("#all").onclick=()=>{hideKnown=false;fcStart()};$("#rs").onclick=()=>{known.clear();saveKnown();hideKnown=false;fcStart()};return;
+  }
+  const i=deck[fi],c=CARDS[i];
+  $("#view").innerHTML=`
+  <div class="meta">Card ${fi+1} of ${deck.length}. Marked known: ${kn} of ${tot}</div>
+  <div class="bar"><i style="width:${(kn/tot)*100}%"></i></div>
+  <button class="panel stage" id="card" style="border-left-color:${col(c[0])}" aria-label="Flashcard. Press to flip.">
+    <div class="tag">${c[0]} ${TOP[c[0]][0]}</div>
+    ${flipped?`<div class="term" style="font-size:1.1rem;color:var(--mute)">${esc(c[1])}</div><div class="def" style="margin-top:8px">${esc(c[2])}</div>`:`<div class="term">${esc(c[1])}</div><div class="hint">Say it in your own words, then flip to check.</div>`}
+  </button>
+  <div class="row">
+    <button class="btn" id="prev">Back</button>
+    <button class="btn p" id="flip">${flipped?"Show term":"Flip card"}</button>
+    <button class="btn" id="next">Next</button>
+    <span class="grow"></span>
+    <button class="btn good" id="kn">${known.has(i)?"Marked known ✓":"I know this"}</button>
+  </div>
+  <div class="row"><button class="btn" id="shuf">Shuffle</button>
+  <button class="btn" id="hk">${hideKnown?"Show known cards":"Hide known cards"}</button></div>`;
+  const go=d=>{fi=(fi+d+deck.length)%deck.length;flipped=false;fcDraw()};
+  $("#card").onclick=$("#flip").onclick=()=>{flipped=!flipped;fcDraw()};
+  $("#prev").onclick=()=>go(-1);$("#next").onclick=()=>go(1);
+  $("#kn").onclick=()=>{known.has(i)?known.delete(i):known.add(i);saveKnown();fcDraw()};
+  $("#shuf").onclick=fcStart;
+  $("#hk").onclick=()=>{hideKnown=!hideKnown;fcStart()};
+  $("#flip").focus({preventScroll:true});
+}
+
+/* Quiz */
+let qs=[],qi=0,score=0,missed=[],answered=false,opts=[];
+function qzStart(list){
+  qs=sh(list||QS.filter(q=>topic==="all"||q[0]===topic)).slice(0,10);
+  qi=0;score=0;missed=[];qzDraw();
+}
+function qzDraw(){
+  if(qi>=qs.length){
+    $("#view").innerHTML=`<div class="panel"><div class="meta">Quiz complete</div><div class="score">${score} / ${qs.length}</div>
+    ${missed.length?`<p>Review what you missed:</p>`+missed.map(q=>`<div class="miss"><b>${esc(q[1])}</b><br>Answer: ${esc(q[2])}<br><span class="meta">${esc(q[4])}</span></div>`).join(""):`<p>A perfect round. Try another topic or a fresh set.</p>`}
+    <div class="row">${missed.length?`<button class="btn p" id="rm">Retry missed (${missed.length})</button>`:""}<button class="btn ${missed.length?"":"p"}" id="nw">New quiz</button></div></div>`;
+    if(missed.length)$("#rm").onclick=()=>qzStart(missed);
+    $("#nw").onclick=()=>qzStart();return;
+  }
+  const q=qs[qi];answered=false;
+  opts=sh([q[2],...q[3]]);
+  $("#view").innerHTML=`<div class="meta">Question ${qi+1} of ${qs.length}. Score: ${score}</div>
+  <div class="bar"><i style="width:${(qi/qs.length)*100}%"></i></div>
+  <div class="panel" style="border-left:10px solid ${col(q[0])}">
+    <div class="meta" style="margin-bottom:6px">${q[0]} ${TOP[q[0]][0]}</div>
+    <p class="q">${esc(q[1])}</p>
+    <div id="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join("")}</div>
+    <div id="fb"></div></div>`;
+  document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(b,q));
+}
+function pick(b,q){
+  if(answered)return;answered=true;
+  const right=opts[b.dataset.k]===q[2];
+  document.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(opts[x.dataset.k]===q[2])x.classList.add("ok")});
+  if(right)score++;else{b.classList.add("no");missed.push(q)}
+  $("#fb").innerHTML=`<div class="why" role="status"><b>${right?"Correct.":"Not quite."}</b> ${esc(q[4])}</div>
+  <div class="row"><button class="btn p" id="nx">${qi+1<qs.length?"Next question":"See results"}</button></div>`;
+  $("#nx").onclick=()=>{qi++;qzDraw()};$("#nx").focus({preventScroll:true});
+}
+chips();start();
+</script>
+</body>
+</html>
